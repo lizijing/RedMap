@@ -1,0 +1,58 @@
+<HDFS tab 的内容-->
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">CopyToHdfs</a></li>
+        <li><a href="#tabs-2">DeleteFile</a></li>
+        <li><a href="#tabs-3">GetHdfsFile</a></li>
+        <li><a href="#tabs-4">CreateHdfsFile</a></li>
+        <li><a href="#tabs-5">RenameHdfsFile</a></li>
+    </ul>
+    <div id="tabs-1">
+        <form accept-charset="${_response_encoding}" action=
+    "/FileOperationSample/CopyToHdfsGetPara" enctype="multipart/form-data" method="post">
+      <p>
+    <label>SourceFile</lable>
+    <input name="hFile" type="file">
+</p>
+<p>
+    <label>DestinationPath</lable>
+    <input name="hPath" type="text">  
+</p>
+<p class="buttons">
+    <input type="submit" value="Upload" id="SubmitButton"  />
+</p>
+    </form>
+    </div>
+   
+    <div id="tabs-2">
+        
+    <form accept-charset="${_response_encoding}" action=
+    "/FileOperationSample/DeleteFileGetPara" enctype="multipart/form-data" method="post">
+      <p>
+    <label>FileName</lable>
+    <input name="hFile" type="file">
+</p>
+
+<p class="buttons">
+    <input type="submit" value="Submit" id="SubmitButton"  />
+</p>
+    </form>
+    
+    </div>
+    <div id="tabs-3">
+     <form accept-charset="${_response_encoding}" action=
+    "/FileOperationSample/getHdfsFileGetPara" enctype="multipart/form-data" method="post">
+      <p>
+    <label>HdfsFile</lable>
+    <input name="sFile" type="text">
+</p>
+<p>
+    <label>SourcePath</lable>
+    <input name="dPath" type="text">  
+</p>
+<p class="buttons">
+    <input type="submit" value="Download" id="SubmitButton"  />
+</p>
+    </form>
+    </div>
+ </div><!--End tabs-->

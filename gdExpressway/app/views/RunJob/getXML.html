@@ -1,0 +1,100 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Highcharts Example</title>
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/one.css'}" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+         <style type="text/css">
+         div#container{width:500px}
+        div #table {height:200;width:200px;float:left;}
+         div #data {height:200;width:200px;float:left;}
+        </style>
+        <script type="text/javascript">
+                
+            function getXML()
+            {
+                         $.ajax({
+                    type:'GET',
+                     url: "${path}",
+                     dataType:"xml",
+                     success:function(data){
+                        var head='<p style="color: white">'+$(data).find("xname").text()+'</p>';
+                       $("#xmlTable").append(head); 
+                        $(data).find("item").each(function(){
+                       
+                            var items = $(this).text();
+                            //$(data).find("point").each(function() 
+                           // {
+                                var content='<tr >'+'<td style="height:20px;width:200px;text-align:top;">'+items+'</td>'+'</tr>'  ;
+                                $("#xmlTable").append(content);  
+                                                 
+                               //  });
+
+                                
+                           
+                        });
+                        
+                           var heads='<p style="color: white">'+$(data).find("yname").text()+'</p>';
+                            $("#dataTable").append(heads);
+                        $(data).find("point").each(function(){
+                        
+                        
+                            var items = $(this).text();
+                            
+                                var content='<tr>'+'<td style="height:20px;width:200px;text-align:top;">'+items+'</td>'+'</td>'+'hello'+'</td>'+'</tr>'  ;
+                               $("#dataTable").append(content);  
+                                                 
+                                 });
+
+                                
+                           
+                     //   });
+
+
+                     }
+                });
+            }
+            $(function() {
+            getXML();
+        });
+
+             </script>
+
+       
+
+    </head>
+
+    <body>
+
+
+        
+    <div id="container">
+      
+    <div id="table" style=width:100px;text-align:top;">
+        <table id="xmlTable"  >
+        <tr>
+       <!-- <th style="color: white">车型</th>-->
+        <p></p>
+     
+        </tr>
+        </table>
+    </div>
+
+    <div id="data" style="width:100px;text-align:top;">
+        <table id="dataTable" >
+        <tr>
+       
+        <p></p>
+     
+    
+        </tr>
+        </table>
+    </div>
+    </div>
+    
+
+    </body>
+    
+</html>

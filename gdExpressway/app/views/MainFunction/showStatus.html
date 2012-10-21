@@ -1,0 +1,64 @@
+
+
+<html>
+<head>
+ <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <style type="text/css">
+        #divTb
+        {
+            width:800px;
+            border:1px solid #aaa;
+            margin:0 auto;
+        }
+
+
+
+        .even{background:#CCCCCC;}
+        .odd{background:#FFFFFF;}
+
+    </style>
+    
+<script type="text/javascript">
+
+        //获取发布模块类型
+        function getModuleInfo() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/MainFunction/showStatus",
+                //data: { id: id, name: name },
+                success: function(json) {
+                    var typeData = json;
+                    $.each(typeData, function(i, n) {
+                        var tbBody = ""
+                        var trColor;
+                        if (i % 2 == 0) {
+                            trColor = "even";
+                        }
+                        else {
+                            trColor = "odd";
+                        }
+                        tbBody += "<tr class='" + trColor + "'><td>" + n.Status + "</td>" + "<td>" + n.JobName + "</td>" + "<td>" + n.xmlPath + "</td></tr>";
+                        $("#myTb").append(tbBody);
+                    });
+                },
+                error: function(json) {
+                    alert("加载失败");
+                }
+            });
+        }
+
+        $(function() {
+            getModuleInfo();
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="divTb">
+        <table id="myTb" style=" width:100%">
+        </table>
+    </div>
+    </form>
+</body>
+</html>

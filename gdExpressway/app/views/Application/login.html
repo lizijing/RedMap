@@ -1,0 +1,47 @@
+
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/one.css'}" />
+ <script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script>
+	function showPath()
+	{
+		var variable=new XMLHttpRequest();
+	variable.open("GET","Application/authenticate",true);
+	  variable.send();
+	variable.onreadystatechange=function()
+  {
+  if (variable.readyState==4)
+    {
+    	$("#filepath").html(variable.responseText);
+    	document.write("${userName}");
+    }
+  }
+	}
+	function showpath()
+	{
+	document.write("${userName}");
+	}
+</script>
+<h1 id="title">Login</h1>
+<p class="light">
+    
+</p>
+
+<form id="login" action="@{Application.authenticate}" method="POST" accept-charset="${_response_encoding}">
+	<p>
+		<label>UserName</label>
+		<input type="text" name="userName" value="${flash.username}" id="username" />
+	</p>
+	<p>
+		<label>Password</label>
+		<input type="password" name="password" value="" id="password" />
+	</p>
+	<p class="buttons">
+		<input type="submit" value="Login" id="loginButton" onclick="showpath()" />
+	</p>
+</form>
+
+#{if flash.notconfirmed}
+	<p>
+		<a class="action" href="@{Application.resendConfirmation(flash.notconfirmed)}">Resend a confirmation email</a>
+	</p>
+#{/if}

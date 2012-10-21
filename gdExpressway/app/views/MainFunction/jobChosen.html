@@ -1,0 +1,110 @@
+<html>
+<head>
+     <link rel="stylesheet" href="@{'public/stylesheets/jquery-ui-1.8.23.custom.css'}">
+     <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/jobChose.css'}" />
+     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    
+     <script src="@{'public/javascripts/jquery-ui-1.8.23.custom.min.js'}"></script>
+ <script src="@{'public/javascripts/datepicker.js'}"></script>
+ <script>
+datepicker();
+</script>
+
+ 
+<!--<style>
+    div#RouteCountLayout {background-color:#EEEEE;height:250px;width:300px;float:left;}
+    div#ModelsCountLayout {background-color:#EEEEE;height:250px;width:300px;float:left;}
+</style>-->
+<body>
+<h1 id="title"   style="font-size:200%">Run Job：对广东高速公路数据执行MapReduce作业<h1>
+
+<h3 style="font-size:150%">路段-车流量</h3>
+    
+    <form id="RouteCount" accept-charset="${_response_encoding}" action=
+    "/RunJob/runRouteCountOnData" enctype="multipart/form-data" method="post">
+    <p> 
+    <label>InputPath</lable>
+    <input name="inputPath" type="text">
+    </p>
+   
+     <p>
+    <label>outputPath</lable>
+    <input name="outputPath" type="text">  
+    <p>
+   
+   StartDate: <input type="text" name="startDate" class="datepicker" size="30">
+   EndDate: <input type="text" name="endDate" class="datepicker" size="30">
+   
+  <p class="buttons">
+    <input type="submit" value="Submit" id="SubmitButton"  />
+  </p>
+    </form>
+       
+  
+
+    
+    <h3 style="font-size:150%">车型-车流量</h3><div></div>
+    
+     <form id="ModelsCount" accept-charset="${_response_encoding}" action=
+    "/RunJob/runModelsCount" enctype="multipart/form-data" method="post">
+    
+    <p>
+    <label>InputPath</lable>
+    <input name="inputPath" type="text">
+     </p>
+     <p>
+    <label>OutputPath</lable>
+    <input name="outputPath" type="text">  
+     </p>
+
+    StartDate: <input type="text" name="startDate" class="datepicker" size="30">
+    EndDate: <input type="text" name="endDate" class="datepicker" size="30">
+    <p>
+    <label>SectionId</lable>
+    <input name="sectionId",type="text">
+    </p>
+   
+    <p class="buttons">
+    <input type="submit" value="Submit" id="SubmitButton2"  />
+    </p>
+    </form>
+      
+   
+    <h3 style="font-size:150%">路段-平均车速</h3>
+    
+    <form id="AverageSpeedCount" accept-charset="${_response_encoding}" action=
+    "/RunJob/runAverageSpeedCount" enctype="multipart/form-data" method="post">
+    <p> 
+    <label>InputPath</lable>
+    <input name="inputPath" type="text">
+    </p>
+   
+     <p>
+    <label>outputPath</lable>
+    <input name="outputPath" type="text">  
+    <p>
+   
+   StartDate: <input type="text" name="startDate" class="datepicker" size="30">
+   EndDate: <input type="text" name="endDate" class="datepicker" size="30">
+   <p> 
+    <label>CarType</lable>
+    <input name="carType" type="text">
+    </p>
+  <p class="buttons">
+    <input type="submit" value="Submit" id="SubmitButton"  />
+  </p>
+    </form>
+      
+       
+       <form  accept-charset="${_response_encoding}" action=
+    "/RunJob/getRouteCountOnDateChart" enctype="multipart/form-data" method="post">
+     <p> 
+    <input name="chartPath" type="hidden" value="/public/data.xml">
+    </p>
+ 
+    </form>
+  
+    
+ </body>
+ </html>
+   

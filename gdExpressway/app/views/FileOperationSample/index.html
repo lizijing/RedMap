@@ -1,0 +1,27 @@
+<html>
+
+
+<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script>
+   function getTime()
+   {
+	var variable=new XMLHttpRequest();
+	variable.open("GET","FileOperationSample/index2",true);
+	  variable.send();
+	variable.onreadystatechange=function()
+  {
+  if (variable.readyState==4)
+    {
+    	$("#liweijie").html(variable.responseText);
+    }
+  }
+    
+    }
+</script>
+
+<body>
+<p id="liweijie">
+点击此按钮则进行一次文件示例操作，具体过程可以在Eclipse的console里面看到或者登陆hdfs看</p>
+<input type ="button"onclick="getTime()">
+</body>
+</html>

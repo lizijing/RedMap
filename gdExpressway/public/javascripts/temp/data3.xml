@@ -1,0 +1,21 @@
+﻿<chart>
+<categories>
+<item>1      </item>
+<item>2      </item>
+<item>3      </item>
+<item>4      </item>
+<item>5      </item>
+</categories>
+<series>
+<name>1-10</name>
+<xname>车型</xname>
+<yname>车流量</yname>
+<data>
+<point>892855</point>
+<point>38561</point>
+<point>271120</point>
+<point>29258</point>
+<point>99137</point>
+</data>
+</series>
+</chart>

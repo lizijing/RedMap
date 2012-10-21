@@ -1,0 +1,8 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+I've some books for your :
+<ul>
+    #{list items:books, as:'book'}
+        <li>${book}</li>
+    #{/list}
+</ul>

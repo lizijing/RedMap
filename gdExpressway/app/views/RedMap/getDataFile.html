@@ -1,0 +1,34 @@
+<style type="text/css">
+#sFile input
+{
+  border-top:0px ;
+  border-left:0px ;
+  border-right:0px ;
+}
+</style>
+<script>
+
+</script>
+<h1>FileSystemCat :<h1>
+
+  <ul>
+    #{list items:files, as:'file'}
+        <p>
+        <form accept-charset="${_response_encoding}" action=
+    "/FileOperationSample/getHdfsFileGetPara" enctype="multipart/form-data" method="post">
+     
+ <p>
+    <label>HdfsFile</lable>
+    <input name="sPath" type="text" value="${file}" style= "background:transparent;border:0 ">
+</p>
+<p>
+    <label>SourcePath</lable>
+    <input name="dPath" type="text">  
+</p>
+<p class="buttons">
+    <input type="submit" value="Download" id="SubmitButton"  />
+</p>
+    </form>
+    </p>
+    #{/list}
+    </ul>

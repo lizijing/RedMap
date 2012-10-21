@@ -1,0 +1,8 @@
+
+#{set title:'FileSystemCat' /}
+<h1 id="title"   style="font-size:200%">File in Hdfs :<h1>
+<ul>
+    #{list items:files, as:'file'}
+        <li>${file}</li>
+    #{/list}
+</ul>

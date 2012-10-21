@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+#{extends 'main.html' /}
+<html>
+<head>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+    $("#overlaytrigger").overlay({effect: 'apple', expose: '#004C7D'}); 
+    </script>
+    <title></title>
+</head>
+
+<body>
+    <h1 id="title">Hdfs Operation</h1>
+    
+    <img id="overlaytrigger" src="/public/images/world.jpg" rel="#overlay"/>  
+  
+<!-- overlayed element, everything is styled with external stylesheet -->  
+<div id="overlay">  
+   <img src="/public/images/world.jpg" />  
+  
+   <div class="details">  
+      <h2>Berlin Gustavohouse</h2>  
+  
+      <p>  
+        Hello world!
+      </p>  
+   </div>  
+  
+</div>  
+    
+    
+    <p class="space">
+    
+ <!-- <p>
+        <label>massage</label>
+        <input type="text" name="massage" value="${flash.massage}" id="massage" />
+    </p>-->
+    </p>
+    <p class="CopyToHdfs">
+        <a href="/FileOperationSample/CopyToHdfs">CopyToHdfs</a>
+    </p>
+    <p class="CreateHdfsFile">
+        <a href="/FileOperationSample/CreateHdfsFile">CreateHdfsFile</a>
+    </p>
+    
+     <p class="DeleteFile">
+        <a href="/FileOperationSample/DeleteFile">DeleteFile</a>
+    </p>
+     <p class="RenameHdfsFile">
+        <a href="/FileOperationSample/RenameHdfsFile">RenameHdfsFile</a>
+    </p>
+     <p class="FileSystemCat">
+        <a href="/FileOperationSample/FileSystemCat">FileSystemCat</a>
+    </p>
+     <p class="ListStatus">
+        <a href="/FileOperationSample/ListStatus">ListStatus</a>
+    </p>
+     <p class="getHdfsFile">
+        <a href="/FileOperationSample/getHdfsFile">getHdfsFile</a>
+    </p>
+    <p class="BrowseHdfs">
+        <a href="http://localhost:50075/browseDirectory.jsp?namenodeInfoPort=50070&dir=/">BrowseHdfs</a>
+    </p>
+</body>
+</html>

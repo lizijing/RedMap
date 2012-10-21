@@ -1,0 +1,43 @@
+
+<html>
+<head>
+ <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    var str="${a}";
+    
+   var str   = '[ {"Status":"Succeeded","JobName":"Job-zijing_1","xmlPath":"/public/data.xml"},{"Status":"Failed","JobName":"Job-zijing_2","xmlPath":"/public/data.xml"} ]';
+  // var json=JSON.parse('${a}');
+    var json= eval(str);
+    //alert(json[0].JobName);
+    //  var json =JSON.parse(str);
+     // var json= eval(str); 
+     $("td").detach(); 
+     $("tr").detach();
+     $("th").detach(); 
+        var temptable="<tr>"+"<th>"+"JobName"+"</th>"+"<th>"+"Status"+"</th>"+"</tr>";
+     for(var i=0;i<json.length;i++)
+     {
+         temptable+="<tr>"+"<td>"+json[i].JobName+"</td>"+"<td>"+json[i].Status+"</td>"+"<td>"+"<a href/"@{RunJob.getRouteCountOnDateChart("+json[i].xmlPath+")}/">"+"</td>"+"</tr>";
+            }
+             $("#jobtable").append(temptable);
+            
+      });
+});
+</script>
+</head>
+
+<body>
+<h2>Job Status</h2>
+
+<div id="divTb">
+        <table id="jobtable" border="1" style=" width:50%">
+        </table>
+    </div>
+<button type="button">刷新</button>
+</body>
+
+</html>
+ 

@@ -1,0 +1,242 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/one.css'}" />
+ <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <style type="text/css">
+        #divTb
+        {
+            width:800px;
+            border:1px solid #aaa;
+            margin:0 auto;
+        }
+
+        .even{background:#CCCCCC;}
+        .odd{background:#FFFFFF;}
+
+    </style>
+    
+<script type="text/javascript">
+        function getChart(xmlpath){
+                     var options = {
+
+                chart: {
+
+                    renderTo: 'container',
+
+                    type: 'line'
+
+                },
+
+                title: {
+
+                    text: []
+
+                },
+
+                xAxis: {
+
+                    categories: []
+
+                },
+
+                yAxis: {
+
+                    title: {
+
+                        text: []
+
+                    }
+
+                },
+
+                series: []
+
+            };
+
+            
+
+            // Load the data from the XML file 
+           
+            $.get("/public/data.xml", function(xml) {
+         //   $.get("/public/data.xml", function(xml) {
+                
+
+                // Split the lines
+
+                var $xml = $(xml);
+
+                
+
+                // push categories
+
+                $xml.find('categories item').each(function(i, category) {
+
+                    options.xAxis.categories.push($(category).text());
+
+                });
+
+                
+
+                // push series
+
+                $xml.find('series').each(function(i, series) {
+
+                    var seriesOptions = {
+
+                        name: $(series).find('name').text(),
+
+                        data: []
+
+                    };
+
+                    
+
+                    // push data points
+
+                    $(series).find('data point').each(function(i, point) {
+
+                        seriesOptions.data.push(
+
+                            parseInt($(point).text())
+
+                        );
+
+                    });
+
+                    
+
+                    // add it to the options
+
+                    options.series.push(seriesOptions);
+                    options.title.text.push( $(series).find('title').text());
+                    options.yAxis.title.text.push( $(series).find('yname').text());
+                     
+
+                });
+
+                var chart = new Highcharts.Chart(options);
+
+            });
+                }
+
+           
+       
+        //获取发布模块类型
+        function getModuleInfo() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/MainFunction/showStatus",
+                //data: { id: id, name: name },
+                success: function(json) {
+                    
+                    var strStart='<table border="1">Job Status';
+                    strStart+='  <tr>'+
+        '<th >JobName'+'</th>'
+        +'<th>Status'+'</th>'+
+        '<th >Chart'+'</th>'+
+        '<th >Data'+'</th>'+
+        '</tr>'
+                    var strEnd='</table>';
+                    
+                    for (var index in json){
+                        var lineStart='<tr>';
+                        var lineEnd='</tr>';
+
+                        var item = json[index];
+                        var jobstatus = item.Status;
+                        var jobName = item.JobName;
+                        var jobXMLPath = item.xmlPath;
+                        
+                        lineStart += '<td>'+jobName+'</td>';
+                        lineStart += '<td >'+jobstatus+'</td>';
+                       // lineStart += '<td>'+jobXMLPath+'</td>';
+                       if(jobstatus=='succeed')
+                       {
+                        lineStart += '<td >'+'<a href="/RunJob/getRouteCountOnDateChart?chartPath='+jobXMLPath+'" color="0099CC">GetChart'+'</a>'+'</td>';
+                        lineStart += '<td>'+'<a href="/RunJob/getXML?xmlPath='+jobXMLPath+'" color="0099CC">checkXML'+'</a>'+'</td>';
+                        }
+                        //lineStart += '<td>'+ '<p><input type="button" onclick="getChart('+jobXMLPath+')" value="GetChart"></p>'
+
+                        strStart += lineStart+lineEnd;
+
+                        console.log(lineStart+lineEnd);
+                    }
+                    
+                    $("#jobStatusForm").html( strStart+strEnd);
+                    // var typeData = json;
+                    //  $("td").detach(); 
+                    //  $("tr").detach();
+                    //  $("th").detach(); 
+                    //     var tbBody="<tr>"+"<th style=\"color: white\">"+"JobName"+"</th>"+"<th style=\"color: white\">"+"Status"+"</th>"+"<th style=\"color: white\">"+"ChartPath"+"</th>"+"</tr>";
+                    //      $("#myTb").append(tbBody);
+                    //                 $.each(typeData, function(i, n) {
+                                            
+                    //                   // var tbBody=" ";
+                    //                     var trColor;
+                    //                     if (i % 2 == 0) {
+                    //                         trColor = "even";
+                    //                     }
+                    //                     else {
+                    //                         trColor = "odd";
+                    //                     }
+                    //                     var str="chartpath";
+                    //                     tbBody = "<tr class='" + trColor + "'><td>" + n.JobName + "</td>" + "<td>"+n.Status+"</td>"+"<td>" +n.xmlPath + "</td></tr>";
+                    //                     $("#myTb").append(tbBody);
+                    //                     var chartpath =n.xmlPath;
+                                      
+                    //                     var name=n.JobName
+                    //                     var path="(\""+n.xmlPath+"\")";
+                    //                     // document.body.innerHTML+=("<a href =\"/RunJob/getRouteCountOnDateChart("+"\""+n.xmlPath+"\""+")\">"+n.JobName+"</a>");
+                                       
+                    //                // document.body.innerHTML+=("{abc"+"bcd");
+                    //                 });
+                        },
+                        error: function(json) {
+                            alert("加载失败");
+                        }
+                    });
+        }
+   
+        $(function() {
+            getModuleInfo();
+        });
+    </script>
+</head>
+<body>
+<h1 id="title"   style="font-size:200%">作业执行情况：Job Status<h1>
+   <!-- <form id="form1" runat="server">
+    <div id="divTb">
+        <table id="myTb" style="background: #fff">
+        <tr>
+        <th style="color: white">JobName</th>
+        <th style="color: white">Status</th>
+        <th style="color: white">ChartPath</th>
+        </tr>
+        </table>
+    </div>
+    </form>-->
+
+    <div id="jobStatusForm">
+
+    </div>
+
+<p><input type="button" onclick="getModuleInfo()" value="Refresh"></p>
+ <!--<div>
+     <form id="CopyToHdfs" accept-charset="${_response_encoding}" action=
+    "/RunJob/getRouteCountOnDateChart" enctype="multipart/form-data" method="post">
+     <label>图表查看：填写相应job生成的xml文件路径 </lable>
+      <p>
+       
+        <input name="chartPath" type="input">
+      </p>
+     
+    <p class="buttons">
+        <input type="submit" value="getChart" id="SubmitButton"  />
+    </p>
+    </form>
+    <p></p>
+   </div>-->
+    <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+</body>
+</html>

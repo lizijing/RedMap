@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+#{extends 'main.html' /}
+<html>
+<head>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <title></title>
+</head>
+
+<body>
+    <h1 id="title">FileSystemCat</h1>
+    <p class="space">
+    
+    </p>
+    
+
+    <form accept-charset="${_response_encoding}" action=
+    "/FileOperationSample/FileSystemCatGetPara" enctype="multipart/form-data" method="post">
+     
+<p>
+	<label>FilePath</lable>
+	<input name="hPath" type="text">  
+</p>
+<p class="buttons">
+	<input type="submit" value="Submit" id="SubmitButton"  />
+</p>
+    </form>
+    
+    <script>
+    
+    $(document).ready(function(){
+    $(":file").css("background-color","#B2E0FF");
+    });
+
+    $(":file").click(function() {
+            $("input:text").val($(":file").val());
+           
+                  
+            });
+    $("form").submit(function() {
+   <!-- document.write($("input:file").val()); -->
+  
+    
+    });
+
+
+            
+    </script>
+</body>
+</html>

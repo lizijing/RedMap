@@ -1,0 +1,134 @@
+package controllers;
+
+import play.*;
+import play.mvc.*;
+import com.google.gson.GsonBuilder;
+import com.sun.xml.internal.txw2.Document;
+import java.io.File;
+import service.FileControl;
+import service.returnSystemTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.util.*;
+
+public class FileOperationSample extends Controller {
+
+	public static void index() throws Exception {
+		render();
+	}
+ 
+	/*
+	 * 返回到CopyToHdfs上传参数的页面
+	 */
+	public static void CopyToHdfs() {
+		render();
+	}
+    /*
+     * 接收CopyToHdfs上传文件及路径参数
+     */
+	public static void CopyToHdfsGetPara(File hFile, String hPath) // CopyToHdfs
+																				// 功能里面获取源文件和目标地址
+	{
+		try
+		{
+			FileControl user = new FileControl();
+		
+		if (hFile != null) {
+			System.out.println("i am the server");
+			if (hPath == null)
+			{
+				user.CopyToHdfs(hFile.toURI(),
+						"hdfs://localhost:9000/");
+				
+			}							
+			else
+			{
+				user.CopyToHdfs(hFile.toURI(),
+						"hdfs://localhost:9000/" + hPath);
+			}
+				
+			renderText(hFile.getName().toString()+"******"+hPath);
+			// renderText(filePath);
+
+		} else
+			renderText("nothing");
+		}
+		catch(Exception e)
+		{
+			System.err.println("Exception error");
+		}
+	}
+
+	/*
+	 * 返回CreateHdfsFile上传参数页面
+	 */
+	  public static void CreateHdfsFile()
+	    {
+	    	render();
+	    }
+	  /*
+	   * 接收CreateHdfsFileGetPara上传参数  
+	   */
+	  public static void CreateHdfsFileGetPara( String hPath) 
+	    {
+	    	renderText(hPath);
+	    }
+	  /*
+	   * 返回DeleteFile上传参数页面
+	   */
+	    public static void DeleteFile()
+	    {
+	    	render();
+	    }
+	    /*
+	     * 接收DeleteFile上传参数
+	     */
+	    public static void DeleteFileGetPara( File hFile) 
+	    {
+	    	renderText(hFile.getName());
+	    }
+	    /*
+	     * 返回RenameHdfsFile上傳參數頁面
+	     */
+	    public static void RenameHdfsFile()
+	    {
+	    	render();
+	    }
+	    /*
+	     * 接收RenameHdfsFile上傳參數
+	     */
+	    public static void RenameHdfsFileGetPara( String hPath) 
+	    {
+	    	renderText(hPath);
+	    }
+	    /*
+	     * 返回FileSystemCat上傳參數頁面
+	     */
+	    public static void FileSystemCat()
+	    {
+	    	render();
+	    }
+	    /*
+	     * 接收FileSystemCat上傳參數
+	     */
+	    public static void FileSystemCatGetPara( String hPath) 
+	    {
+	    	renderText(hPath);
+	    }
+	    /*
+	     * 返回ListStatus上傳參數頁面
+	     */
+	    public static void ListStatus()
+	    {
+	    	render();
+	    }
+	    /*
+	     * 接收ListStatus上傳參數
+	     */
+	    public static void ListStatusGetPara( String hPath) 
+	    {
+	    	renderText(hPath);
+	    }
+	    
+	    
+}
